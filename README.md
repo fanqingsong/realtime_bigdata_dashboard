@@ -5,6 +5,17 @@
 A demo for realtime dashboard, based on bigdata technology and popular realtime comunication web technology.
 
 ---
+## Architect
+
+- scrawler.py ---> kafka
+- kafka ---> wordCounter.py
+- wordCounter.py ---> kafka
+- kafka ---> app.py
+- app.py ---> browser
+
+![demo](wordCloud.png)
+
+---
 ## Technology
 ### bigdata techs:
 * kafka -- tranfer all data between components
