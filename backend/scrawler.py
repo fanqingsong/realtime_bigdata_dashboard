@@ -14,7 +14,7 @@ class Scrawler:
 
     def _get_html_doc(self):
         res = requests.get(self._web_url)
-        #print(res.text)
+        print(res.text)
 
         html_doc = res.text
 

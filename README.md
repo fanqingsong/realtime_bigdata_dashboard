@@ -20,18 +20,24 @@ a demo for realtime dashboard, based on bigdata technology and popular realtime 
 ---
 ## Install
 ### Kafka
+
+reference: http://dblab.xmu.edu.cn/blog/1096-2/
+
 ### Spark
+
+reference: http://dblab.xmu.edu.cn/blog/1307-2/
+
 ### Dependency
 
 enter project root directory
 run such commands:
 
-`
+```
 ./bin/install.sh
-`
+```
 
 ---
-## Run
+## Run APP
 ### run zookeeper
 open a new terminal, 
 run such commands:
@@ -75,6 +81,39 @@ enter project root directory,
 run such commands:
 
 ```
-python3 backend/wordStatsObserver.py
+python3 backend/scrawler.py
 ```
+
+Then go to wordStats observer to see new wordstats.
+
+### build front code
+
+open a new terminal, 
+enter project root directory,
+run such commands:
+
+```
+cd frontend/vueproj
+npm run build
+```
+
+
+### run flask server
+
+open a new terminal, 
+enter project root directory,
+run such commands:
+
+```
+python3 frontend/app.py
+```
+
+Then go to browser and access url 
+http://127.0.0.1:5000/#/
+
+
+Note:
+This project is inspired by chinese bigdata course:
+http://dblab.xmu.edu.cn/post/8274/
+
 
