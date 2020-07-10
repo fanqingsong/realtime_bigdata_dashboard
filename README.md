@@ -94,6 +94,7 @@ run such commands:
 
 ```
 cd frontend/vueproj
+npm install
 npm run build
 ```
 
@@ -112,7 +113,8 @@ Then go to browser and access url
 http://127.0.0.1:5000/#/
 
 
-Note:
+---
+## Note:
 This project is inspired by chinese bigdata course:
 http://dblab.xmu.edu.cn/post/8274/
 
