@@ -46,8 +46,9 @@ open a new terminal,
 run such commands:
 
 ```
+rm -rf /tmp/kafka-logs/*
 cd /usr/local/kafka
-bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
 ```
 
 ### run wordCounter

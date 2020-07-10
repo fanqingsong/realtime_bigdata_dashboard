@@ -49,7 +49,7 @@ def Get_dic(rdd_list):
 def sendmsg(rdd):
     if rdd.count != 0:
         msg = Get_dic(rdd.collect())
-        producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
+        producer = KafkaProducer(bootstrap_servers='localhost:9092')
         # 实例化一个KafkaProducer示例，用于向Kafka投递消息
         producer.send("wordStats", msg.encode('utf8'))
         # 很重要，不然不会更新
