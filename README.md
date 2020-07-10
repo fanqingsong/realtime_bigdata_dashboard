@@ -2,7 +2,7 @@
 
 ---
 ## Introduction
-a demo for realtime dashboard, based on bigdata technology and popular realtime comunication web technology.
+A demo for realtime dashboard, based on bigdata technology and popular realtime comunication web technology.
 
 ---
 ## Technology
