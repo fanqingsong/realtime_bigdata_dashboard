@@ -7,11 +7,14 @@ A demo for realtime dashboard, based on bigdata technology and popular realtime 
 ---
 ## Architect
 
+### flow
 - scrawler.py ---> kafka
 - kafka ---> wordCounter.py
 - wordCounter.py ---> kafka
 - kafka ---> app.py
 - app.py ---> browser
+
+### diagram
 
 ```
 +--------------+                    +------------------+                     +----------------+
@@ -35,6 +38,7 @@ A demo for realtime dashboard, based on bigdata technology and popular realtime 
 
 ```
 
+### Demo
 
 ![demo](wordCloud.png)
 
