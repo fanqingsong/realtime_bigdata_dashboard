@@ -16,6 +16,8 @@ A demo for realtime dashboard, based on bigdata technology and popular realtime 
 
 ### diagram
 
+Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
+
 ```
 +--------------+                    +------------------+                     +----------------+
 |              |         1          |                  |         4           |                |
@@ -153,7 +155,9 @@ http://127.0.0.1:5000/#/
 
 ---
 ## Note:
+### inspiration
 This project is inspired by chinese bigdata course:
 http://dblab.xmu.edu.cn/post/8274/
 
-
+### Markdown cheatsheet
+ReadMe is written by Markdown, here is syntax cheatsheet [Markdown Syntax](https://www.markdown.xyz/cheat-sheet/)
