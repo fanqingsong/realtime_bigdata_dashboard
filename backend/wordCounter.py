@@ -5,6 +5,9 @@ from pyspark import SparkConf, SparkContext
 import json
 import sys
 
+from stop_words import get_stop_words
+
+
 def KafkaWordCount(zkQuorum, group, topics, numThreads):
     spark_conf = SparkConf().setAppName("KafkaWordCount")
     sc = SparkContext(conf=spark_conf)
@@ -29,9 +32,14 @@ def KafkaWordCount(zkQuorum, group, topics, numThreads):
     words = lines.flatMap(lambda x: x.split(" "))
     wordcount = words.map(lambda x: (x, 1)).updateStateByKey(updateFunc, initialRDD=initialStateRDD)
 
-    wordcount.foreachRDD(lambda x: sendmsg(x))
+    stop_words = get_stop_words('en')
+    print("--------- stop word ---------")
+    print(stop_words)
+    mainWordCount = wordcount.filter(lambda x: x[1]>=5).filter(lambda x: x[0] not in stop_words)
 
-    wordcount.pprint()
+    mainWordCount.foreachRDD(lambda x: sendmsg(x))
+
+    mainWordCount.pprint()
 
     ssc.start()
     ssc.awaitTermination()

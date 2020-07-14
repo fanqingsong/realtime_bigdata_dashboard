@@ -106,26 +106,6 @@ run such commands:
 ./bin/startWordCounter.sh
 ```
 
-### run wordStats Observor to watch word statistics
-open a new terminal, 
-enter project root directory,
-run such commands:
-
-```
-python3 backend/wordStatsObserver.py
-```
-
-### run scrawler to get new page content and insert to wordCounter
-open a new terminal, 
-enter project root directory,
-run such commands:
-
-```
-python3 backend/scrawler.py
-```
-
-Then go to wordStats observer to see new wordstats.
-
 ### build front code
 
 open a new terminal, 
@@ -137,7 +117,6 @@ cd frontend/vueproj
 npm install
 npm run build
 ```
-
 
 ### run flask server
 
@@ -151,6 +130,19 @@ python3 frontend/app.py
 
 Then go to browser and access url 
 http://127.0.0.1:5000/#/
+
+
+### run scrawler to get new page content and insert to wordCounter
+open a new terminal, 
+enter project root directory,
+run such commands:
+
+```
+python3 backend/scrawler.py
+```
+
+Then go to browser to see new word cloud.
+
 
 
 ---
