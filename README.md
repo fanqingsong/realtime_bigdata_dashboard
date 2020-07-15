@@ -153,3 +153,8 @@ http://dblab.xmu.edu.cn/post/8274/
 
 ### Markdown cheatsheet
 ReadMe is written by Markdown, here is syntax cheatsheet [Markdown Syntax](https://www.markdown.xyz/cheat-sheet/)
+
+### vue-wordcloud component
+Usage reference [vue-worldcloud](https://github.com/feifang/vue-wordcloud)
+
+
