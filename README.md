@@ -61,11 +61,11 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 ## Install
 ### Kafka
 
-reference: http://dblab.xmu.edu.cn/blog/1096-2/
+[reference](http://dblab.xmu.edu.cn/blog/1096-2/)
 
 ### Spark
 
-reference: http://dblab.xmu.edu.cn/blog/1307-2/
+[reference](http://dblab.xmu.edu.cn/blog/1307-2/)
 
 ### Dependency
 
@@ -154,7 +154,16 @@ http://dblab.xmu.edu.cn/post/8274/
 ### Markdown cheatsheet
 ReadMe is written by Markdown, here is syntax cheatsheet [Markdown Syntax](https://www.markdown.xyz/cheat-sheet/)
 
-### vue-wordcloud component
-Usage reference [vue-worldcloud](https://github.com/feifang/vue-wordcloud)
-
-
+---
+## Reference
+- [Spark](http://spark.apache.org/docs/2.1.0/)
+- [Kafka](http://kafka.apache.org/)
+- [kafka-python](https://pypi.org/project/kafka-python/)
+- [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+- [Flask-SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
+- [requests](https://2.python-requests.org/en/master/)
+- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+- [stop-words](https://pypi.org/project/stop-words/)
+- [Socket.IO](https://socket.io/)
+- [vue](https://vuejs.org/v2/guide/)
+- [vue-wordcloud component](https://github.com/feifang/vue-wordcloud)
