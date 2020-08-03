@@ -7,7 +7,7 @@ A demo for realtime dashboard, based on bigdata technology and popular realtime 
 ---
 ## Architect
 
-### flow
+### realtime stream
 - scrawler.py ---> kafka
 - kafka ---> wordCounter.py
 - wordCounter.py ---> kafka
