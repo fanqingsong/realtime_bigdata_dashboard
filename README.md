@@ -78,23 +78,12 @@ run such commands:
 
 ---
 ## Run APP
-### run zookeeper
-open a new terminal, 
-run such commands:
-
-```
-cd /usr/local/kafka
-bin/zookeeper-server-start.sh config/zookeeper.properties
-```
-
 ### run kafka
 open a new terminal, 
 run such commands:
 
 ```
-rm -rf /tmp/kafka-logs/*
-cd /usr/local/kafka
-bin/kafka-server-start.sh config/server.properties
+./bin/start_kafka.sh
 ```
 
 ### run wordCounter
@@ -103,7 +92,7 @@ enter project root directory,
 run such commands:
 
 ```
-./bin/startWordCounter.sh
+./bin/start_word_counter.sh
 ```
 
 ### build front code
@@ -113,9 +102,7 @@ enter project root directory,
 run such commands:
 
 ```
-cd frontend/vueproj
-npm install
-npm run build
+./bin/build_ui.sh
 ```
 
 ### run flask server
@@ -125,7 +112,7 @@ enter project root directory,
 run such commands:
 
 ```
-python3 frontend/app.py
+./bin/start_django.sh
 ```
 
 Then go to browser and access url 
@@ -138,7 +125,7 @@ enter project root directory,
 run such commands:
 
 ```
-python3 backend/scrawler.py
+./bin/start_scrawler.sh
 ```
 
 Then go to browser to see new word cloud.
