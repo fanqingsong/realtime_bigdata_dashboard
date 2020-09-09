@@ -3,7 +3,7 @@
 echo "----- start kafka --------"
 ./bin/start_kafka.sh &
 
-sleep 15s
+sleep 20s
 
 echo "----- start flask --------"
 ./bin/start_flask.sh &
