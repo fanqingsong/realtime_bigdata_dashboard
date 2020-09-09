@@ -59,22 +59,23 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 
 ---
 ## Install
-### Kafka
+
+- pyenv install
+[reference](https://github.com/pyenv/pyenv#installation)
+
+- install all other dependencies
+
+```
+./bin/install_deps.sh
+```
+
+- install Kafka
 
 [reference](http://dblab.xmu.edu.cn/blog/1096-2/)
 
-### Spark
+- install Spark(2.1.0)
 
 [reference](http://dblab.xmu.edu.cn/blog/1307-2/)
-
-### Dependency
-
-enter project root directory
-run such commands:
-
-```
-./bin/install.sh
-```
 
 ---
 ## Run APP
@@ -95,16 +96,6 @@ run such commands:
 ./bin/start_word_counter.sh
 ```
 
-### build front code
-
-open a new terminal, 
-enter project root directory,
-run such commands:
-
-```
-./bin/build_ui.sh
-```
-
 ### run flask server
 
 open a new terminal, 
@@ -112,7 +103,7 @@ enter project root directory,
 run such commands:
 
 ```
-./bin/start_django.sh
+./bin/start_flask.sh
 ```
 
 Then go to browser and access url 
@@ -129,6 +120,17 @@ run such commands:
 ```
 
 Then go to browser to see new word cloud.
+
+
+## build front code if web code chaged
+
+open a new terminal, 
+enter project root directory,
+run such commands:
+
+```
+./bin/build_ui.sh
+```
 
 
 

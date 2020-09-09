@@ -12,7 +12,7 @@ def KafkaWordCount(zkQuorum, group, topics, numThreads):
     spark_conf = SparkConf().setAppName("KafkaWordCount")
     sc = SparkContext(conf=spark_conf)
     sc.setLogLevel("ERROR")
-    ssc = StreamingContext(sc, 1)
+    ssc = StreamingContext(sc, 5)
     #ssc.checkpoint("file:///usr/local/spark/checkpoint")
     # 这里表示把检查点文件写入分布式文件系统HDFS，所以要启动Hadoop
     ssc.checkpoint(".")

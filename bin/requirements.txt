@@ -1,9 +1,0 @@
-
-kafka-python
-requests
-beautifulsoup4
-flask
-flask-socketio
-stop-words
-
-

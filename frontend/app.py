@@ -1,3 +1,39 @@
+
+# https://stackoverflow.com/questions/34581255/python-flask-socketio-send-message-from-thread-not-always-working
+# Set this variable to "threading", "eventlet" or "gevent" to test the
+# different async modes, or leave it set to None for the application to choose
+# the best option based on available packages.
+async_mode = None
+
+if async_mode is None:
+    try:
+        import eventlet
+        async_mode = 'eventlet'
+    except ImportError:
+        pass
+
+    if async_mode is None:
+        try:
+            from gevent import monkey
+            async_mode = 'gevent'
+        except ImportError:
+            pass
+
+    if async_mode is None:
+        async_mode = 'threading'
+
+    print('async_mode is ' + async_mode)
+
+# monkey patching is necessary because this application uses a background
+# thread
+if async_mode == 'eventlet':
+    import eventlet
+    eventlet.monkey_patch()
+elif async_mode == 'gevent':
+    from gevent import monkey
+    monkey.patch_all()
+
+
 import json
 from flask import Flask, render_template
 from flask_socketio import SocketIO
@@ -10,7 +46,7 @@ app = Flask(import_name=__name__,
             template_folder='./vueproj/dist/') # 配置模板文件的文件夹
             
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 # 实例化一个consumer，接收topic为wordStats的消息
 consumer = KafkaConsumer('wordStats')
@@ -20,6 +56,7 @@ def background_thread():
     print("-- now run back ground thread ----")
     for msg in consumer:
         wordStats = msg.value.decode('utf8')
+        print("-------------- stat data ------------")
         print(wordStats)
         socketio.emit('wordStats_msg',{'data':wordStats})
  
