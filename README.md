@@ -110,7 +110,7 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 - run flask server
 
 ```
-./bin/start_flask.sh
+./bin/start_flask.shgit 
 ```
 
 Then go to browser and access url 
@@ -125,7 +125,7 @@ To get new page content and feed to wordCounter
 ./bin/start_scrawler.sh
 ```
 
-Then go to browser to see new word cloud.
+Then go to browser to see changing word cloud.
 
 
 ---
