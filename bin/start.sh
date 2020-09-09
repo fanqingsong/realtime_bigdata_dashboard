@@ -1,14 +1,18 @@
 
 
+echo "----- start kafka --------"
 ./bin/start_kafka.sh &
 
-sleep 10s
+sleep 15s
 
-./bin/start_word_counter.sh &
-
-sleep 5s
-
+echo "----- start flask --------"
 ./bin/start_flask.sh &
+
+
+sleep 15s
+
+echo "----- start word counter --------"
+./bin/start_word_counter.sh &
 
 
 

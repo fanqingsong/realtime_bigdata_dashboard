@@ -2,4 +2,4 @@
 *.crc
 receivedBlockMetadata/
 startWordCounter.sh___jb_old___
-checkpoint-*
+_checkpoint
