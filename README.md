@@ -88,6 +88,12 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 ./bin/build_ui.sh
 ```
 
+### Run (On One Terminal)
+
+```bash
+./bin/start.sh
+```
+
 ### Run (On Different Terminals)
 - run kafka
 
@@ -107,17 +113,11 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 ./bin/start_flask.sh
 ```
 
-### Run (On One Terminal)
-
-```bash
-./bin/start.sh
-```
-
 Then go to browser and access url 
 http://127.0.0.1:5000/#/
 
 
-## run scrawler 
+## Run Scrawler 
 
 To get new page content and feed to wordCounter
 
