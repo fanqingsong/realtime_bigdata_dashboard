@@ -78,60 +78,54 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 [reference](http://dblab.xmu.edu.cn/blog/1307-2/)
 
 ---
-## Run APP
-### run kafka
-open a new terminal, 
-run such commands:
+## Run
+
+### Prerequisite
+
+- frontend build
+
+```bash
+./bin/build_ui.sh
+```
+
+### Run (On Different Terminals)
+- run kafka
 
 ```
 ./bin/start_kafka.sh
 ```
 
-### run wordCounter
-open a new terminal, 
-enter project root directory,
-run such commands:
+- run wordCounter
 
 ```
 ./bin/start_word_counter.sh
 ```
 
-### run flask server
-
-open a new terminal, 
-enter project root directory,
-run such commands:
+- run flask server
 
 ```
 ./bin/start_flask.sh
+```
+
+### Run (On One Terminal)
+
+```bash
+./bin/start.sh
 ```
 
 Then go to browser and access url 
 http://127.0.0.1:5000/#/
 
 
-### run scrawler to get new page content and insert to wordCounter
-open a new terminal, 
-enter project root directory,
-run such commands:
+## run scrawler 
+
+To get new page content and feed to wordCounter
 
 ```
 ./bin/start_scrawler.sh
 ```
 
 Then go to browser to see new word cloud.
-
-
-## build front code if web code chaged
-
-open a new terminal, 
-enter project root directory,
-run such commands:
-
-```
-./bin/build_ui.sh
-```
-
 
 
 ---
