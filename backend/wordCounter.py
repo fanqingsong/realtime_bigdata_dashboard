@@ -7,15 +7,22 @@ import sys
 
 from stop_words import get_stop_words
 
-
-def KafkaWordCount(zkQuorum, group, topics, numThreads):
+def createSparkContext():
     spark_conf = SparkConf().setAppName("KafkaWordCount")
     sc = SparkContext(conf=spark_conf)
     sc.setLogLevel("ERROR")
+
+    return sc
+
+def createStreamingContext(sc):
     ssc = StreamingContext(sc, 5)
     #ssc.checkpoint("file:///usr/local/spark/checkpoint")
     # 这里表示把检查点文件写入分布式文件系统HDFS，所以要启动Hadoop
     ssc.checkpoint("_checkpoint")
+
+    return ssc
+
+def createKafkaStream(ssc, zkQuorum, group, topics, numThreads):
     topicAry = topics.split(",")
     # 将topic转换为hashmap形式，而python中字典就是一种hashmap
     topicMap = {}
@@ -23,6 +30,9 @@ def KafkaWordCount(zkQuorum, group, topics, numThreads):
         topicMap[topic] = numThreads
     lines = KafkaUtils.createStream(ssc, zkQuorum, group, topicMap).map(lambda x: x[1])
 
+    return lines
+
+def createStatDSOnKafkaStream(sc, lines):
     # RDD with initial state (key, value) pairs
     initialStateRDD = sc.parallelize([(u'hello', 1), (u'world', 1)])
  
@@ -37,13 +47,7 @@ def KafkaWordCount(zkQuorum, group, topics, numThreads):
     print(stop_words)
     mainWordCount = wordcount.filter(lambda x: x[1]>=5).filter(lambda x: x[0] not in stop_words)
 
-    mainWordCount.foreachRDD(lambda x: sendmsg(x))
-
-    mainWordCount.pprint()
-
-    ssc.start()
-    ssc.awaitTermination()
-
+    return mainWordCount
 
 # 格式转化，将[["1", 3], ["0", 4], ["2", 3]]变为[{'1': 3}, {'0': 4}, {'2': 3}]，这样就不用修改第四个教程的代码了
 def Get_dic(rdd_list):
@@ -53,7 +57,6 @@ def Get_dic(rdd_list):
         res.append(tmp)
     return json.dumps(res)
 
-
 def sendmsg(rdd):
     if rdd.count != 0:
         msg = Get_dic(rdd.collect())
@@ -62,6 +65,25 @@ def sendmsg(rdd):
         producer.send("wordStats", msg.encode('utf8'))
         # 很重要，不然不会更新
         producer.flush()
+
+def setSenderOnStatDS(statDS):
+    statDS.foreachRDD(lambda x: sendmsg(x))
+
+    statDS.pprint()
+
+def KafkaWordCount(zkQuorum, group, topics, numThreads):
+    sc = createSparkContext()
+    ssc = createStreamingContext(sc)
+
+    lines = createKafkaStream(ssc, zkQuorum, group, topics, numThreads)
+
+    statDS = createStatDSOnKafkaStream(sc, lines)
+
+    setSenderOnStatDS(statDS)
+
+    ssc.start()
+    ssc.awaitTermination()
+
 
 
 if __name__ == '__main__':
@@ -73,6 +95,7 @@ if __name__ == '__main__':
     if (len(sys.argv) < 5):
         print("Usage: KafkaWordCount <zkQuorum> <group> <topics> <numThreads>")
         exit(1)
+
     zkQuorum = sys.argv[1]
     group = sys.argv[2]
     topics = sys.argv[3]

@@ -17,7 +17,7 @@ done
 # run kafka
 rm -rf /tmp/kafka-logs/*
 cd /usr/local/kafka
-bin/kafka-server-start.sh config/server.properties &
+bin/kafka-server-start.sh config/server.properties
 cd -
 
 

@@ -12,7 +12,7 @@ echo "----- start flask --------"
 sleep 15s
 
 echo "----- start word counter --------"
-./bin/start_word_counter.sh &
+./bin/start_word_counter.sh
 
 
 

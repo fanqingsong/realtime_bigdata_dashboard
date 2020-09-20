@@ -110,7 +110,7 @@ Note: powered by asciiflow website [asciiflow](http://asciiflow.com/)
 - run flask server
 
 ```
-./bin/start_flask.shgit 
+./bin/start_flask.sh
 ```
 
 Then go to browser and access url 
