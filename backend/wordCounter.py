@@ -4,8 +4,14 @@ from pyspark.streaming.kafka import KafkaUtils
 from pyspark import SparkConf, SparkContext
 import json
 import sys
-
+import nltk
+from nltk import sent_tokenize, word_tokenize
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
 from stop_words import get_stop_words
+
+#nltk.download('punkt')
+
 
 def createSparkContext():
     spark_conf = SparkConf().setAppName("KafkaWordCount")
@@ -32,22 +38,60 @@ def createKafkaStream(ssc, zkQuorum, group, topics, numThreads):
 
     return lines
 
-def createStatDSOnKafkaStream(sc, lines):
+def updateFunc(new_values, last_sum):
+    return sum(new_values) + (last_sum or 0)
+
+def preprocessing(text):
+    # tokenize into words
+    tokens = [word for sent in nltk.sent_tokenize(text) for word in nltk.word_tokenize(sent)]
+
+    # remove stopwords
+    stop = stopwords.words('english')
+    tokens = [token for token in tokens if token not in stop]
+
+    # remove words less than three letters
+    tokens = [word for word in tokens if len(word) >= 3]
+
+    # lower capitalization
+    tokens = [word.lower() for word in tokens]
+
+    # lemmatize
+    lmtzr = WordNetLemmatizer()
+    tokens = [lmtzr.lemmatize(word) for word in tokens]
+    preprocessed_text= ' '.join(tokens)
+
+    return preprocessed_text
+
+def getStatDSFromKafkaStream(sc, lines):
     # RDD with initial state (key, value) pairs
     initialStateRDD = sc.parallelize([(u'hello', 1), (u'world', 1)])
  
-    def updateFunc(new_values, last_sum):
-        return sum(new_values) + (last_sum or 0)
+    words = lines.\
+            flatMap(word_tokenize)
 
-    words = lines.flatMap(lambda x: x.split(" "))
-    wordcount = words.map(lambda x: (x, 1)).updateStateByKey(updateFunc, initialRDD=initialStateRDD)
+    statDS = words.\
+                map(lambda x: (x, 1)).\
+                updateStateByKey(updateFunc, initialRDD=initialStateRDD)
 
+    return statDS
+
+def setStopWordFilterOnStatDS(statDS):
     stop_words = get_stop_words('en')
     print("--------- stop word ---------")
     print(stop_words)
-    mainWordCount = wordcount.filter(lambda x: x[1]>=5).filter(lambda x: x[0] not in stop_words)
 
-    return mainWordCount
+    statDS = statDS.\
+                filter(lambda x: x[1]>=5).\
+                filter(lambda x: x[0] not in stop_words)
+
+    return statDS
+
+def createStatDSOnKafkaStream(sc, lines):
+    statDS = getStatDSFromKafkaStream(sc, lines)
+
+    statDS = setStopWordFilterOnStatDS(statDS)
+
+    return statDS
 
 # 格式转化，将[["1", 3], ["0", 4], ["2", 3]]变为[{'1': 3}, {'0': 4}, {'2': 3}]，这样就不用修改第四个教程的代码了
 def Get_dic(rdd_list):
